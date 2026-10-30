@@ -1,0 +1,44 @@
+package controller;
+
+import dal.UserDAO;
+import model.User; // Class Entity User gồm: id, username, password, fullname, phone, address, role
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+public class LoginController extends HttpServlet {
+    
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String user = req.getParameter("username");
+        String pass = req.getParameter("password");
+
+        UserDAO dao = new UserDAO();
+        User account = dao.checkLogin(user, pass);
+
+        if (account == null) {
+            // Sai tài khoản/mật khẩu -> Đẩy lại về trang login kèm báo lỗi
+            req.setAttribute("error", "Sai tên đăng nhập hoặc mật khẩu!");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        } else {
+            // Đăng nhập thành công -> Lưu thông tin vào Session (Phiên làm việc)
+            HttpSession session = req.getSession();
+            session.setAttribute("account", account);
+
+            // BẺ LÁI DỰA TRÊN ROLE
+            if (account.getRole().equalsIgnoreCase("Admin")) {
+                resp.sendRedirect(req.getContextPath() + "/admin/orders"); // Bay vào Dashboard Admin
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/shop"); // Bay ra trang mua hàng
+            }
+        }
+    }
+}
