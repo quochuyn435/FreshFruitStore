@@ -9,49 +9,69 @@
 <html lang="vi">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký - FreshFruit Store</title>
     <!-- Nhúng Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
 </head>
-<body class="bg-light d-flex justify-content-center align-items-center" style="min-height: 100vh; padding: 40px 0;">
+<body class="bg-light ff-auth-body d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh; padding: 40px 16px;">
     
-    <div class="card shadow p-4" style="width: 450px;">
-        <h3 class="text-center text-success mb-4">Tạo Tài Khoản</h3>
+    <!-- Logo về trang chủ -->
+    <div class="mb-3 text-center">
+        <a href="${pageContext.request.contextPath}/index.html" class="ff-brand text-decoration-none">
+            <span class="brand-badge"><i class="bi bi-basket2-fill"></i></span>
+            <span>FreshFruit Store</span>
+        </a>
+    </div>
+
+    <div class="card ff-auth-card shadow p-4 p-md-5" style="width: 100%; max-width: 500px;">
+        <div class="text-center mb-2">
+            <span class="badge bg-success-subtle text-success rounded-pill px-3 py-2 mb-2">
+                <i class="bi bi-stars me-1"></i>Thành viên mới
+            </span>
+        </div>
+        <h3 class="text-center text-success fw-bold mb-4">Tạo Tài Khoản</h3>
         
         <form action="${pageContext.request.contextPath}/register" method="post">
             <div class="mb-3">
-                <label class="form-label fw-bold">Tên đăng nhập</label>
+                <label class="form-label fw-bold"><i class="bi bi-person text-success me-1"></i>Tên đăng nhập</label>
                 <input type="text" class="form-control" name="username" placeholder="Nhập tên đăng nhập" required />
             </div>
             
             <div class="mb-3">
-                <label class="form-label fw-bold">Mật khẩu</label>
+                <label class="form-label fw-bold"><i class="bi bi-key text-success me-1"></i>Mật khẩu</label>
                 <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu" required />
             </div>
             
-            <div class="mb-3">
-                <label class="form-label fw-bold">Họ và tên</label>
-                <input type="text" class="form-control" name="fullname" placeholder="Ví dụ: Nguyễn Văn A" required />
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold"><i class="bi bi-card-heading text-success me-1"></i>Họ và tên</label>
+                    <input type="text" class="form-control" name="fullname" placeholder="Ví dụ: Nguyễn Văn A" required />
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold"><i class="bi bi-telephone text-success me-1"></i>Số điện thoại</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Ví dụ: 0912345678" required />
+                </div>
             </div>
             
             <div class="mb-3">
-                <label class="form-label fw-bold">Số điện thoại</label>
-                <input type="text" class="form-control" name="phone" placeholder="Ví dụ: 0912345678" required />
-            </div>
-            
-            <div class="mb-3">
-                <label class="form-label fw-bold">Địa chỉ giao hàng</label>
+                <label class="form-label fw-bold"><i class="bi bi-geo-alt text-success me-1"></i>Địa chỉ giao hàng</label>
                 <textarea class="form-control" name="address" rows="2" placeholder="Số nhà, Đường, Phường/Xã..." required></textarea>
             </div>
             
             <!-- Hiển thị báo đỏ nếu tên đăng nhập đã bị người khác chọn -->
-            <p class="text-danger text-center mb-3">${error}</p>
+            <p class="text-danger text-center mb-3 fw-semibold small">${error}</p>
             
-            <button type="submit" class="btn btn-success w-100 mb-3">Đăng ký</button>
+            <button type="submit" class="btn btn-success w-100 py-2 mb-3">
+                <i class="bi bi-person-plus-fill me-1"></i>Đăng ký
+            </button>
         </form>
         
         <!-- Nút quay lại trang đăng nhập -->
-        <div class="text-center">
+        <div class="text-center border-top pt-3">
             <span>Đã có tài khoản? </span>
             <a href="${pageContext.request.contextPath}/login.jsp" class="text-success text-decoration-none fw-bold">Đăng nhập ngay</a>
         </div>
