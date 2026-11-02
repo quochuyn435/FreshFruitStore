@@ -25,11 +25,14 @@
                 <span>FreshFruit Admin Dashboard</span>
             </span>
             <div class="navbar-nav me-auto ms-4 gap-2">
-                <a class="nav-link active fw-bold text-success" href="${pageContext.request.contextPath}/admin-order.jsp">
-                    <i class="bi bi-receipt me-1"></i>Quản lý Đơn hàng (Dev 4)
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin-user.jsp">
+                    <i class="bi bi-people-fill me-1"></i>Quản lý Tài khoản (Khóa/Mở khóa)
                 </a>
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin-product.jsp">
-                    <i class="bi bi-box-seam me-1"></i>Sản phẩm & Tồn kho (Dev 2)
+                    <i class="bi bi-box-seam me-1"></i>Sản phẩm & Ngừng bán
+                </a>
+                <a class="nav-link active fw-bold text-success" href="${pageContext.request.contextPath}/admin-order.jsp">
+                    <i class="bi bi-receipt me-1"></i>Quản lý Đơn hàng (Dev 4)
                 </a>
                 <a class="nav-link" href="${pageContext.request.contextPath}/shop">
                     <i class="bi bi-shop me-1"></i>Xem Cửa hàng

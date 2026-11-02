@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import dal.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -18,9 +17,15 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author livsu
  */
 public class RegisterController extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/register.jsp").forward(req, resp);
+    }
    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String user = req.getParameter("username");
         String pass = req.getParameter("password");
         String name = req.getParameter("fullname");

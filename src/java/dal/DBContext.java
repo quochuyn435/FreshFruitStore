@@ -18,7 +18,13 @@ public class DBContext {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=FreshFruitStore;encrypt=true;trustServerCertificate=true";
             
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, user, pass);
+            try {
+                connection = DriverManager.getConnection(url, user, pass);
+            } catch (SQLException firstEx) {
+                // Thử kết nối qua instance SQLEXPRESS nếu máy dùng named instance
+                String expressUrl = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=FreshFruitStore;encrypt=true;trustServerCertificate=true";
+                connection = DriverManager.getConnection(expressUrl, user, pass);
+            }
             
         } catch (ClassNotFoundException | SQLException ex) {
             System.err.println("Lỗi kết nối CSDL tại DBContext: " + ex.getMessage());

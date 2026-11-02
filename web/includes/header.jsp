@@ -34,6 +34,11 @@
                         <i class="bi bi-receipt-cutoff me-1"></i>Đơn mua
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link ff-nav-link" href="${pageContext.request.contextPath}/profile.jsp">
+                        <i class="bi bi-person-vcard me-1"></i>Hồ sơ cá nhân
+                    </a>
+                </li>
                 <c:if test="${sessionScope.account != null && sessionScope.account.role == 'Admin'}">
                     <li class="nav-item dropdown">
                         <a class="nav-link ff-nav-link dropdown-toggle text-danger" href="#" role="button" data-bs-toggle="dropdown">
@@ -41,13 +46,18 @@
                         </a>
                         <ul class="dropdown-menu shadow border-0 rounded-3">
                             <li>
-                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin/orders">
-                                    <i class="bi bi-box-seam me-2 text-success"></i>Quản lý Đơn hàng (Dev 4)
+                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-user.jsp">
+                                    <i class="bi bi-people-fill me-2 text-danger"></i>Quản lý Tài khoản (Khóa/Mở khóa)
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-product.jsp">
-                                    <i class="bi bi-grid-3x3-gap me-2 text-primary"></i>Quản lý Sản phẩm & Kho (Dev 2)
+                                    <i class="bi bi-grid-3x3-gap me-2 text-primary"></i>Quản lý Hoa quả & Ngừng bán
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin/orders">
+                                    <i class="bi bi-box-seam me-2 text-success"></i>Quản lý Đơn hàng
                                 </a>
                             </li>
                         </ul>
@@ -83,14 +93,24 @@
                                     </span>
                                 </li>
                                 <li>
+                                    <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/profile.jsp">
+                                        <i class="bi bi-person-gear me-2"></i>Chỉnh sửa thông tin cá nhân
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/my-orders.jsp">
                                         <i class="bi bi-clock-history me-2"></i>Lịch sử đơn hàng
                                     </a>
                                 </li>
                                 <c:if test="${sessionScope.account.role == 'Admin'}">
                                     <li>
-                                        <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin/orders">
-                                            <i class="bi bi-speedometer2 me-2"></i>Vào trang Admin
+                                        <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-user.jsp">
+                                            <i class="bi bi-people me-2"></i>Quản lý Tài khoản (Admin)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-product.jsp">
+                                            <i class="bi bi-box-seam me-2"></i>Quản lý Hoa quả (Admin)
                                         </a>
                                     </li>
                                 </c:if>

@@ -8,6 +8,7 @@ public class User {
     private String phone;
     private String address;
     private String role;
+    private boolean locked;
 
     public User() {
     }
@@ -20,9 +21,19 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.role = role;
+        this.locked = false;
     }
-    
-    
+
+    public User(int userId, String username, String password, String fullName, String phone, String address, String role, boolean locked) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.role = role;
+        this.locked = locked;
+    }
 
     // Nhấn Alt + Insert để tạo Getter và Setter tại đây
 
@@ -54,6 +65,10 @@ public class User {
         return role;
     }
 
+    public boolean isLocked() {
+        return locked;
+    }
+
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -81,6 +96,8 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-    
-    
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
 }

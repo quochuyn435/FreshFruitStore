@@ -18,6 +18,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String user = req.getParameter("username");
         String pass = req.getParameter("password");
 
@@ -28,16 +29,20 @@ public class LoginController extends HttpServlet {
             // Sai tài khoản/mật khẩu -> Đẩy lại về trang login kèm báo lỗi
             req.setAttribute("error", "Sai tên đăng nhập hoặc mật khẩu!");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        } else if (account.isLocked()) {
+            // Tài khoản bị Admin khóa -> Báo lỗi không cho đăng nhập
+            req.setAttribute("error", "Tài khoản của bạn đã bị khóa bởi Quản trị viên!");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
         } else {
             // Đăng nhập thành công -> Lưu thông tin vào Session (Phiên làm việc)
             HttpSession session = req.getSession();
             session.setAttribute("account", account);
 
             // BẺ LÁI DỰA TRÊN ROLE
-            if (account.getRole().equalsIgnoreCase("Admin")) {
-                resp.sendRedirect(req.getContextPath() + "/admin/orders"); // Bay vào Dashboard Admin
+            if (account.getRole() != null && account.getRole().equalsIgnoreCase("Admin")) {
+                resp.sendRedirect(req.getContextPath() + "/admin/users"); // Bay vào Dashboard Admin (Quản lý Tài khoản)
             } else {
-                resp.sendRedirect(req.getContextPath() + "/shop"); // Bay ra trang mua hàng
+                resp.sendRedirect(req.getContextPath() + "/shop.jsp"); // Bay ra trang mua hàng
             }
         }
     }

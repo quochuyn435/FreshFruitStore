@@ -1,6 +1,6 @@
 <%-- 
     Document   : admin-product
-    Description: Trang Admin Quản lý Danh mục, Sản phẩm & Tồn kho (Dành cho Dev 2)
+    Description: Trang Admin Quản lý Danh mục, Sản phẩm, Tồn kho & Ngừng hoạt động hoa quả bán ra
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -9,25 +9,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Quản lý Sản phẩm & Kho - FreshFruit</title>
+    <title>Admin - Quản lý Sản phẩm & Ngừng bán - FreshFruit</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <!-- Navbar Admin đồng bộ với admin-order.jsp -->
+    <!-- Navbar Admin đồng bộ -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
         <div class="container-fluid px-4">
-            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="${pageContext.request.contextPath}/admin/orders">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="${pageContext.request.contextPath}/admin-user.jsp">
                 <span class="badge bg-success p-2"><i class="bi bi-basket2-fill"></i></span>
                 <span>FreshFruit Admin Dashboard</span>
             </a>
             <div class="navbar-nav me-auto ms-4 gap-2">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin-order.jsp">
-                    <i class="bi bi-receipt me-1"></i>Quản lý Đơn hàng (Dev 4)
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin-user.jsp">
+                    <i class="bi bi-people-fill me-1"></i>Quản lý Tài khoản (Khóa/Mở khóa)
                 </a>
                 <a class="nav-link active fw-bold text-success" href="${pageContext.request.contextPath}/admin-product.jsp">
-                    <i class="bi bi-box-seam me-1"></i>Sản phẩm & Tồn kho (Dev 2)
+                    <i class="bi bi-box-seam me-1"></i>Sản phẩm & Ngừng bán
+                </a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin-order.jsp">
+                    <i class="bi bi-receipt me-1"></i>Quản lý Đơn hàng
                 </a>
                 <a class="nav-link" href="${pageContext.request.contextPath}/shop">
                     <i class="bi bi-shop me-1"></i>Xem Cửa hàng
@@ -40,9 +43,9 @@
     </nav>
 
     <div class="container-fluid px-4 pb-5">
-        <!-- Thống kê nhanh Kho & Danh mục -->
+        <!-- Thống kê nhanh Kho & Trạng thái bán -->
         <div class="row g-3 mb-4">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card ff-admin-stat-card p-3 bg-white">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
@@ -53,24 +56,35 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card ff-admin-stat-card p-3 bg-white">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <div class="text-secondary small fw-semibold">Tổng Sản phẩm</div>
-                            <h4 class="fw-bold mb-0">${not empty listProduct ? listProduct.size() : '24'} mặt hàng</h4>
+                            <div class="text-secondary small fw-semibold">Hoa quả Đang bán</div>
+                            <h4 class="fw-bold text-success mb-0">20 loại</h4>
                         </div>
-                        <div class="ff-stat-icon bg-primary-subtle text-primary"><i class="bi bi-boxes"></i></div>
+                        <div class="ff-stat-icon bg-primary-subtle text-primary"><i class="bi bi-check2-circle"></i></div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="card ff-admin-stat-card p-3 bg-white">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="text-secondary small fw-semibold">Đã ngừng hoạt động</div>
+                            <h4 class="fw-bold text-danger mb-0">4 loại</h4>
+                        </div>
+                        <div class="ff-stat-icon bg-danger-subtle text-danger"><i class="bi bi-slash-circle"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="card ff-admin-stat-card p-3 bg-white">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <div class="text-secondary small fw-semibold">Thao tác nhanh</div>
                             <button class="btn btn-success btn-sm mt-1" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                                <i class="bi bi-plus-lg me-1"></i>Thêm Sản phẩm mới
+                                <i class="bi bi-plus-lg me-1"></i>Thêm Hoa quả mới
                             </button>
                         </div>
                         <div class="ff-stat-icon bg-warning-subtle text-warning"><i class="bi bi-plus-circle-fill"></i></div>
@@ -82,7 +96,7 @@
         <div class="row g-4">
             <!-- Cột Trái: Quản lý Danh mục (Categories) -->
             <div class="col-lg-4">
-                <div class="card border-0 shadow-sm p-3 bg-white">
+                <div class="card border-0 shadow-sm p-3 bg-white rounded-4">
                     <h5 class="fw-bold text-success mb-3">
                         <i class="bi bi-folder2-open me-2"></i>Quản lý Danh mục
                     </h5>
@@ -101,7 +115,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tên Danh mục</th>
-                                    <th class="text-end">Thao tác</th>
+                                    <th class="text-end">Trạng thái</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,12 +124,7 @@
                                         <td>#${c.categoryId}</td>
                                         <td class="fw-semibold">${c.categoryName}</td>
                                         <td class="text-end">
-                                            <form action="${pageContext.request.contextPath}/admin/category/delete" method="post" class="d-inline">
-                                                <input type="hidden" name="categoryId" value="${c.categoryId}">
-                                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
+                                            <span class="badge bg-success-subtle text-success">Hoạt động</span>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -123,17 +132,17 @@
                                     <tr>
                                         <td>#1</td>
                                         <td class="fw-semibold">Trái Cây Nhập Khẩu</td>
-                                        <td class="text-end"><button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button></td>
+                                        <td class="text-end"><span class="badge bg-success-subtle text-success">Hoạt động</span></td>
                                     </tr>
                                     <tr>
                                         <td>#2</td>
                                         <td class="fw-semibold">Đặc Sản Việt Nam</td>
-                                        <td class="text-end"><button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button></td>
+                                        <td class="text-end"><span class="badge bg-success-subtle text-success">Hoạt động</span></td>
                                     </tr>
                                     <tr>
                                         <td>#3</td>
                                         <td class="fw-semibold">Trái Cây Đà Lạt</td>
-                                        <td class="text-end"><button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button></td>
+                                        <td class="text-end"><span class="badge bg-success-subtle text-success">Hoạt động</span></td>
                                     </tr>
                                 </c:if>
                             </tbody>
@@ -142,15 +151,15 @@
                 </div>
             </div>
 
-            <!-- Cột Phải: Quản lý Sản phẩm & Tồn kho (Products & Stock) -->
+            <!-- Cột Phải: Quản lý Hoa quả & Ngừng hoạt động bán ra -->
             <div class="col-lg-8">
-                <div class="card border-0 shadow-sm p-3 bg-white">
+                <div class="card border-0 shadow-sm p-3 bg-white rounded-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold text-success mb-0">
-                            <i class="bi bi-box-seam me-2"></i>Danh sách Sản phẩm & Tồn kho
+                            <i class="bi bi-box-seam me-2"></i>Danh sách Hoa quả & Trạng thái Kinh doanh
                         </h5>
                         <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                            <i class="bi bi-plus-circle me-1"></i>Thêm Sản phẩm
+                            <i class="bi bi-plus-circle me-1"></i>Thêm Hoa quả
                         </button>
                     </div>
 
@@ -160,10 +169,11 @@
                                 <tr>
                                     <th>Mã SP</th>
                                     <th>Ảnh</th>
-                                    <th>Tên sản phẩm</th>
+                                    <th>Tên loại hoa quả</th>
                                     <th>Giá bán</th>
-                                    <th>Tồn kho (Cập nhật)</th>
-                                    <th>Hành động</th>
+                                    <th>Tồn kho</th>
+                                    <th>Trạng thái</th>
+                                    <th class="text-end">Ngừng / Mở bán</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -188,16 +198,34 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="${pageContext.request.contextPath}/admin/product/delete" method="post" class="d-inline">
+                                            <span class="badge ${p.stockQuantity > 0 ? 'bg-success' : 'bg-secondary'}">
+                                                ${p.stockQuantity > 0 ? 'Đang bán' : 'Ngừng bán'}
+                                            </span>
+                                        </td>
+                                        <td class="text-end">
+                                            <!-- Form Ngừng hoạt động / Mở bán lại hoa quả -->
+                                            <form action="${pageContext.request.contextPath}/admin/product/toggle-status" method="post" class="d-inline">
                                                 <input type="hidden" name="productId" value="${p.productId}">
-                                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                    <i class="bi bi-trash"></i> Xóa
-                                                </button>
+                                                <c:choose>
+                                                    <c:when test="${p.stockQuantity > 0}">
+                                                        <input type="hidden" name="action" value="deactivate">
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                            <i class="bi bi-pause-circle me-1"></i>Ngừng bán
+                                                        </button>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input type="hidden" name="action" value="activate">
+                                                        <button type="submit" class="btn btn-success btn-sm">
+                                                            <i class="bi bi-play-circle me-1"></i>Mở bán lại
+                                                        </button>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </form>
                                         </td>
                                     </tr>
                                 </c:forEach>
 
+                                <!-- Dữ liệu mẫu hiển thị khi chưa truyền listProduct -->
                                 <c:if test="${empty listProduct}">
                                     <tr>
                                         <td>#1</td>
@@ -214,8 +242,41 @@
                                                 <button type="submit" class="btn btn-outline-success btn-sm"><i class="bi bi-check2"></i></button>
                                             </form>
                                         </td>
+                                        <td><span class="badge bg-success">Đang bán</span></td>
+                                        <td class="text-end">
+                                            <form action="${pageContext.request.contextPath}/admin/product/toggle-status" method="post" class="d-inline">
+                                                <input type="hidden" name="productId" value="1">
+                                                <input type="hidden" name="action" value="deactivate">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                    <i class="bi bi-pause-circle me-1"></i>Ngừng hoạt động
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-light text-muted">
+                                        <td>#2</td>
+                                        <td><img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=200&q=80" class="rounded opacity-50" style="width: 48px; height: 48px; object-fit: cover;"></td>
                                         <td>
-                                            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Xóa</button>
+                                            <div class="fw-bold">Dâu Tây Hana Đà Lạt</div>
+                                            <small>Danh mục: Trái Cây Đà Lạt</small>
+                                        </td>
+                                        <td class="text-secondary fw-bold">120000.0 đ / hộp</td>
+                                        <td>
+                                            <form action="${pageContext.request.contextPath}/admin/product/stock" method="post" class="d-flex align-items-center gap-1">
+                                                <input type="hidden" name="productId" value="2">
+                                                <input type="number" name="stockQuantity" value="0" min="0" class="form-control form-control-sm text-center" style="width: 75px;">
+                                                <button type="submit" class="btn btn-outline-success btn-sm"><i class="bi bi-check2"></i></button>
+                                            </form>
+                                        </td>
+                                        <td><span class="badge bg-secondary">Ngừng hoạt động</span></td>
+                                        <td class="text-end">
+                                            <form action="${pageContext.request.contextPath}/admin/product/toggle-status" method="post" class="d-inline">
+                                                <input type="hidden" name="productId" value="2">
+                                                <input type="hidden" name="action" value="activate">
+                                                <button type="submit" class="btn btn-success btn-sm">
+                                                    <i class="bi bi-play-circle me-1"></i>Mở bán lại
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </c:if>
@@ -227,19 +288,19 @@
         </div>
     </div>
 
-    <!-- Modal Thêm Sản phẩm mới (Dev 2) -->
+    <!-- Modal Thêm Sản phẩm mới -->
     <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content rounded-4 border-0">
                 <form action="${pageContext.request.contextPath}/admin/product/add" method="post">
                     <div class="modal-header bg-success text-white rounded-top-4">
-                        <h5 class="modal-title fw-bold"><i class="bi bi-plus-circle me-2"></i>Thêm Sản phẩm Trái cây mới</h5>
+                        <h5 class="modal-title fw-bold"><i class="bi bi-plus-circle me-2"></i>Thêm Loại Hoa Quả Mới</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body p-4">
                         <div class="row g-3">
                             <div class="col-md-8">
-                                <label class="form-label fw-semibold">Tên sản phẩm</label>
+                                <label class="form-label fw-semibold">Tên loại hoa quả</label>
                                 <input type="text" name="productName" class="form-control" placeholder="VD: Nho Mẫu Đơn Hàn Quốc" required>
                             </div>
                             <div class="col-md-4">
