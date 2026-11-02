@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <!-- Filter Phân quyền Admin (Dev 1): Bảo vệ toàn bộ route và trang JSP của Admin -->
+    <filter>
+        <filter-name>AdminAuthFilter</filter-name>
+        <filter-class>controller.AdminAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
+        <url-pattern>/admin-user.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
+        <url-pattern>/admin-order.jsp</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>ShopController</servlet-name>
         <servlet-class>ShopController</servlet-class>
@@ -19,10 +37,6 @@
     <servlet>
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>controller.LogoutController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProfileController</servlet-name>
-        <servlet-class>controller.ProfileController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminUserController</servlet-name>
@@ -47,10 +61,6 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProfileController</servlet-name>
-        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminUserController</servlet-name>

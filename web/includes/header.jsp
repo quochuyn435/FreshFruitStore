@@ -20,44 +20,29 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ff-nav-link" href="${pageContext.request.contextPath}/shop">
+                    <a class="nav-link ff-nav-link" href="${pageContext.request.contextPath}/shop.jsp">
                         <i class="bi bi-shop me-1"></i>Cửa hàng
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ff-nav-link" href="${pageContext.request.contextPath}/cart.jsp">
-                        <i class="bi bi-cart3 me-1"></i>Giỏ hàng
+                    <a class="nav-link ff-nav-link" href="${pageContext.request.contextPath}/checkout.jsp">
+                        <i class="bi bi-credit-card-2-front me-1"></i>Thanh toán
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link ff-nav-link" href="${pageContext.request.contextPath}/my-orders.jsp">
-                        <i class="bi bi-receipt-cutoff me-1"></i>Đơn mua
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link ff-nav-link" href="${pageContext.request.contextPath}/profile.jsp">
-                        <i class="bi bi-person-vcard me-1"></i>Hồ sơ cá nhân
-                    </a>
-                </li>
-                <c:if test="${sessionScope.account != null && sessionScope.account.role == 'Admin'}">
+                <c:if test="${sessionScope.account != null && (sessionScope.account.role == 'Admin' || sessionScope.account.role == 'admin')}">
                     <li class="nav-item dropdown">
                         <a class="nav-link ff-nav-link dropdown-toggle text-danger" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-shield-lock me-1"></i>Quản trị (Admin)
                         </a>
                         <ul class="dropdown-menu shadow border-0 rounded-3">
                             <li>
-                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-user.jsp">
-                                    <i class="bi bi-people-fill me-2 text-danger"></i>Quản lý Tài khoản (Khóa/Mở khóa)
+                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin/users">
+                                    <i class="bi bi-people-fill me-2 text-danger"></i>Quản lý Tài khoản
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-product.jsp">
-                                    <i class="bi bi-grid-3x3-gap me-2 text-primary"></i>Quản lý Hoa quả & Ngừng bán
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin/orders">
-                                    <i class="bi bi-box-seam me-2 text-success"></i>Quản lý Đơn hàng
+                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-order.jsp">
+                                    <i class="bi bi-receipt me-2 text-success"></i>Quản lý Đơn hàng
                                 </a>
                             </li>
                         </ul>
@@ -66,17 +51,6 @@
             </ul>
 
             <div class="d-flex align-items-center gap-2">
-                <!-- Nút Giỏ hàng nhanh (Dev 3) -->
-                <a href="${pageContext.request.contextPath}/cart.jsp" class="btn btn-light position-relative border rounded-pill px-3">
-                    <i class="bi bi-bag-check-fill text-success me-1"></i>
-                    <span class="fw-semibold">Giỏ hàng</span>
-                    <c:if test="${not empty sessionScope.cart}">
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            !
-                        </span>
-                    </c:if>
-                </a>
-
                 <!-- Khu vực Tài khoản & Phân quyền (Dev 1) -->
                 <c:choose>
                     <c:when test="${not empty sessionScope.account}">
@@ -92,29 +66,19 @@
                                         ${sessionScope.account.role}
                                     </span>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/profile.jsp">
-                                        <i class="bi bi-person-gear me-2"></i>Chỉnh sửa thông tin cá nhân
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/my-orders.jsp">
-                                        <i class="bi bi-clock-history me-2"></i>Lịch sử đơn hàng
-                                    </a>
-                                </li>
-                                <c:if test="${sessionScope.account.role == 'Admin'}">
+                                <c:if test="${sessionScope.account.role == 'Admin' || sessionScope.account.role == 'admin'}">
                                     <li>
-                                        <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-user.jsp">
+                                        <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin/users">
                                             <i class="bi bi-people me-2"></i>Quản lý Tài khoản (Admin)
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-product.jsp">
-                                            <i class="bi bi-box-seam me-2"></i>Quản lý Hoa quả (Admin)
+                                        <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/admin-order.jsp">
+                                            <i class="bi bi-receipt me-2"></i>Quản lý Đơn hàng (Admin)
                                         </a>
                                     </li>
+                                    <li><hr class="dropdown-divider"></li>
                                 </c:if>
-                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <a class="dropdown-item py-2 text-danger fw-semibold" href="${pageContext.request.contextPath}/logout">
                                         <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất

@@ -6,6 +6,19 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    // Kiểm tra phân quyền bắt buộc: Chỉ tài khoản Admin đã đăng nhập mới được truy cập
+    model.User currentAccount = (model.User) session.getAttribute("account");
+    if (currentAccount == null) {
+        request.setAttribute("error", "Vui lòng đăng nhập bằng tài khoản Admin để truy cập khu vực Quản trị!");
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
+        return;
+    }
+    if (currentAccount.getRole() == null || !currentAccount.getRole().trim().equalsIgnoreCase("Admin")) {
+        request.getRequestDispatcher("/access-denied.jsp").forward(request, response);
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -25,34 +38,29 @@
                 <span>FreshFruit Admin Dashboard</span>
             </span>
             <div class="navbar-nav me-auto ms-4 gap-2">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin-user.jsp">
-                    <i class="bi bi-people-fill me-1"></i>Quản lý Tài khoản (Khóa/Mở khóa)
-                </a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin-product.jsp">
-                    <i class="bi bi-box-seam me-1"></i>Sản phẩm & Ngừng bán
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/users">
+                    <i class="bi bi-people-fill me-1"></i>Quản lý Tài khoản
                 </a>
                 <a class="nav-link active fw-bold text-success" href="${pageContext.request.contextPath}/admin-order.jsp">
-                    <i class="bi bi-receipt me-1"></i>Quản lý Đơn hàng (Dev 4)
+                    <i class="bi bi-receipt me-1"></i>Quản lý Đơn hàng
                 </a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/shop">
+                <a class="nav-link" href="${pageContext.request.contextPath}/shop.jsp">
                     <i class="bi bi-shop me-1"></i>Xem Cửa hàng
                 </a>
             </div>
-            <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-light btn-sm">Đăng xuất</a>
+            <div class="d-flex align-items-center gap-3">
+                <span class="text-light small">
+                    <i class="bi bi-shield-check text-success me-1"></i>Admin: <strong>${sessionScope.account.username}</strong>
+                </span>
+                <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-light btn-sm">Đăng xuất</a>
+            </div>
         </div>
     </nav>
 
-    <div class="container-fluid px-4 pb-5">
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-            <h3 class="mb-0 fw-bold text-dark"><i class="bi bi-clipboard-check text-success me-2"></i>Danh sách Đơn hàng mới</h3>
-            <div class="d-flex gap-2">
-                <a href="${pageContext.request.contextPath}/admin-product.jsp" class="btn btn-outline-success btn-sm">
-                    <i class="bi bi-boxes me-1"></i>Quản lý Sản phẩm & Kho
-                </a>
-            </div>
-        </div>
+    <div class="container-fluid px-4">
+        <h3 class="mb-3">Danh sách Đơn hàng mới</h3>
         
-        <div class="table-responsive bg-white p-3 shadow-sm rounded-4">
+        <div class="table-responsive bg-white p-3 shadow-sm rounded">
             <table class="table table-hover align-middle">
                 <thead class="table-success">
                     <tr>
@@ -100,41 +108,9 @@
                             </td>
                         </tr>
                     </c:forEach>
-
-                    <!-- Hiển thị dòng mẫu khi listOrder chưa được truyền từ AdminOrderController (UI Preview) -->
-                    <c:if test="${empty listOrder}">
-                        <tr>
-                            <td>#101</td>
-                            <td>
-                                <b>Nguyễn Văn A</b><br>
-                                <small>0912345678</small>
-                            </td>
-                            <td class="text-danger fw-bold">290000.0 đ</td>
-                            <td>BANK_TRANSFER</td>
-                            <td>
-                                <span class="badge bg-warning">Chờ xác nhận</span>
-                            </td>
-                            <td>
-                                <form action="${pageContext.request.contextPath}/admin/order/update" method="post" class="d-flex">
-                                    <input type="hidden" name="orderId" value="101">
-                                    <select name="newStatus" class="form-select form-select-sm me-2" style="width: 160px;">
-                                        <option value="Chờ xác nhận" selected>Chờ xác nhận</option>
-                                        <option value="Đã xác nhận">Đã xác nhận</option>
-                                        <option value="Đã thanh toán">Đã thanh toán</option>
-                                        <option value="Đang giao hàng">Đang giao hàng</option>
-                                        <option value="Hoàn thành">Hoàn thành</option>
-                                        <option value="Đã hủy">Đã hủy</option>
-                                    </select>
-                                    <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </c:if>
                 </tbody>
             </table>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -29,46 +29,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <a class="nav-link ff-nav-link active" href="index.html"><i class="bi bi-house-door me-1"></i>Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ff-nav-link" href="shop"><i class="bi bi-shop me-1"></i>Cửa hàng</a>
+                            <a class="nav-link ff-nav-link" href="shop.jsp"><i class="bi bi-shop me-1"></i>Cửa hàng</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ff-nav-link" href="cart.jsp"><i class="bi bi-cart3 me-1"></i>Giỏ hàng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link ff-nav-link" href="my-orders.jsp"><i class="bi bi-receipt-cutoff me-1"></i>Đơn mua</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link ff-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="bi bi-grid me-1"></i>Menu các trang (Demo UI)
-                            </a>
-                            <ul class="dropdown-menu shadow border-0 rounded-3">
-                                <li><h6 class="dropdown-header text-success">Dev 1: Auth, Hồ sơ & Quản lý TK</h6></li>
-                                <li><a class="dropdown-item" href="login.jsp"><i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập (login.jsp)</a></li>
-                                <li><a class="dropdown-item" href="register.jsp"><i class="bi bi-person-plus me-2"></i>Đăng ký (register.jsp)</a></li>
-                                <li><a class="dropdown-item" href="profile.jsp"><i class="bi bi-person-vcard me-2"></i>Chỉnh sửa thông tin User (profile.jsp)</a></li>
-                                <li><a class="dropdown-item" href="admin-user.jsp"><i class="bi bi-people-fill me-2"></i>Admin Quản lý & Khóa/Mở TK (admin-user.jsp)</a></li>
-                                <li><a class="dropdown-item" href="access-denied.jsp"><i class="bi bi-shield-exclamation me-2"></i>Báo lỗi Phân quyền (access-denied.jsp)</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><h6 class="dropdown-header text-success">Dev 2: Catalog & Ngừng bán</h6></li>
-                                <li><a class="dropdown-item" href="shop.jsp"><i class="bi bi-shop-window me-2"></i>Cửa hàng (shop.jsp)</a></li>
-                                <li><a class="dropdown-item" href="product-detail.jsp"><i class="bi bi-eye me-2"></i>Chi tiết sản phẩm (product-detail.jsp)</a></li>
-                                <li><a class="dropdown-item" href="admin-product.jsp"><i class="bi bi-boxes me-2"></i>Admin Quản lý SP & Ngừng bán (admin-product.jsp)</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><h6 class="dropdown-header text-success">Dev 3: Giỏ hàng & Checkout</h6></li>
-                                <li><a class="dropdown-item" href="cart.jsp"><i class="bi bi-cart4 me-2"></i>Giỏ hàng (cart.jsp)</a></li>
-                                <li><a class="dropdown-item" href="checkout.jsp"><i class="bi bi-credit-card-2-front me-2"></i>Thanh toán (checkout.jsp)</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><h6 class="dropdown-header text-success">Dev 4: Đơn hàng & VietQR</h6></li>
-                                <li><a class="dropdown-item" href="payment-qr.jsp"><i class="bi bi-qr-code-scan me-2"></i>Thanh toán VietQR (payment-qr.jsp)</a></li>
-                                <li><a class="dropdown-item" href="my-orders.jsp"><i class="bi bi-bag-check me-2"></i>Lịch sử đơn hàng (my-orders.jsp)</a></li>
-                                <li><a class="dropdown-item" href="admin-order.jsp"><i class="bi bi-clipboard-data me-2"></i>Admin Quản lý Đơn (admin-order.jsp)</a></li>
-                            </ul>
+                            <a class="nav-link ff-nav-link" href="checkout.jsp"><i class="bi bi-credit-card-2-front me-1"></i>Thanh toán</a>
                         </li>
                     </ul>
                     <div class="d-flex align-items-center gap-2">
-                        <a href="cart.jsp" class="btn btn-light border rounded-pill px-3">
-                            <i class="bi bi-bag-check-fill text-success me-1"></i>Giỏ hàng
-                        </a>
                         <a href="login.jsp" class="btn btn-outline-success rounded-pill px-3">Đăng nhập</a>
                         <a href="register.jsp" class="btn btn-success rounded-pill px-3">Đăng ký</a>
                     </div>
@@ -89,30 +56,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             Vị Ngọt Tự Nhiên Cho <span class="text-success">Sức Khỏe Gia Đình</span> Bạn
                         </h1>
                         <p class="lead text-secondary mb-4">
-                            FreshFruit Store tuyển chọn những loại trái cây nội địa và nhập khẩu tươi ngon nhất trong ngày. Đặt hàng nhanh chóng, thanh toán tiện lợi qua COD hoặc VietQR.
+                            FreshFruit Store cung ứng và phân phối hoa quả tươi trực tuyến. Chọn hoa quả nhanh chóng, thanh toán tiện lợi qua COD hoặc chuyển khoản VietQR.
                         </p>
                         <div class="d-flex flex-wrap gap-3">
-                            <a href="shop" class="btn btn-success btn-lg px-4 py-3 rounded-pill shadow-sm">
+                            <a href="shop.jsp" class="btn btn-success btn-lg px-4 py-3 rounded-pill shadow-sm">
                                 <i class="bi bi-cart-plus me-2"></i>Mua Sắm Ngay
                             </a>
-                            <a href="shop.jsp" class="btn btn-outline-success btn-lg px-4 py-3 rounded-pill bg-white">
-                                <i class="bi bi-compass me-2"></i>Xem Danh Mục
+                            <a href="login.jsp" class="btn btn-outline-success btn-lg px-4 py-3 rounded-pill bg-white">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Đăng Nhập
                             </a>
-                        </div>
-
-                        <div class="row g-3 mt-4 pt-2">
-                            <div class="col-4">
-                                <div class="fw-bold fs-4 text-success">50+</div>
-                                <div class="small text-secondary">Loại trái cây tươi</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="fw-bold fs-4 text-success">2 Giờ</div>
-                                <div class="small text-secondary">Giao hàng nội thành</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="fw-bold fs-4 text-success">100%</div>
-                                <div class="small text-secondary">Đổi trả nếu dập hỏng</div>
-                            </div>
                         </div>
                     </div>
 
@@ -120,132 +72,45 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=900&q=80"
                              alt="Fresh Fruit Basket"
                              class="img-fluid rounded-4 shadow-lg border border-4 border-white"
-                             style="max-height: 360px; width: 100%; object-fit: cover;">
+                             style="max-height: 340px; width: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Cam kết dịch vụ -->
-        <section class="container mt-5">
+        <section class="container mt-5 mb-4">
             <div class="row g-4">
-                <div class="col-md-3">
-                    <div class="card h-100 p-3 border-0 shadow-sm text-center">
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 shadow-sm text-center">
                         <div class="mx-auto mb-2 text-success fs-2"><i class="bi bi-award-fill"></i></div>
-                        <h6 class="fw-bold mb-1">Chuẩn VietGAP / GlobalGAP</h6>
-                        <p class="small text-secondary mb-0">Kiểm định nguồn gốc rõ ràng từng lô hàng nhập kho.</p>
+                        <h6 class="fw-bold mb-1">Hoa Quả Tươi Trong Ngày</h6>
+                        <p class="small text-secondary mb-0">Đa dạng đơn vị tính linh hoạt theo kg, hộp hoặc combo.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card h-100 p-3 border-0 shadow-sm text-center">
-                        <div class="mx-auto mb-2 text-success fs-2"><i class="bi bi-lightning-charge-fill"></i></div>
-                        <h6 class="fw-bold mb-1">Giao Hàng Siêu Tốc 2H</h6>
-                        <p class="small text-secondary mb-0">Bảo quản lạnh xuyên suốt giúp trái cây luôn tươi mọng.</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card h-100 p-3 border-0 shadow-sm text-center">
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 shadow-sm text-center">
                         <div class="mx-auto mb-2 text-success fs-2"><i class="bi bi-qr-code-scan"></i></div>
-                        <h6 class="fw-bold mb-1">Thanh Toán Đa Dạng</h6>
-                        <p class="small text-secondary mb-0">Hỗ trợ tiền mặt (COD) và quét mã VietQR tự động.</p>
+                        <h6 class="fw-bold mb-1">Thanh Toán Nhanh Gọn</h6>
+                        <p class="small text-secondary mb-0">Hỗ trợ tiền mặt khi nhận hàng (COD) và chuyển khoản QR.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card h-100 p-3 border-0 shadow-sm text-center">
-                        <div class="mx-auto mb-2 text-success fs-2"><i class="bi bi-arrow-repeat"></i></div>
-                        <h6 class="fw-bold mb-1">Cam Kết 1 Đổi 1</h6>
-                        <p class="small text-secondary mb-0">Hoàn tiền hoặc đổi mới ngay nếu chất lượng không đạt.</p>
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 border-0 shadow-sm text-center">
+                        <div class="mx-auto mb-2 text-success fs-2"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <h6 class="fw-bold mb-1">Xác Nhận & Giao Nhanh</h6>
+                        <p class="small text-secondary mb-0">Đơn hàng được tiếp nhận và xử lý đóng gói tức thì.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Danh mục nổi bật (Hỗ trợ Dev 2 & Dev 3) -->
-        <section class="container mt-5">
-            <div class="d-flex justify-content-between align-items-end mb-4">
-                <div>
-                    <span class="text-success fw-bold small text-uppercase">Danh mục sản phẩm</span>
-                    <h3 class="fw-bold mb-0">Khám Phá Theo Nhu Cầu</h3>
-                </div>
-                <a href="shop" class="btn btn-outline-success btn-sm rounded-pill px-3">
-                    Xem tất cả <i class="bi bi-arrow-right ms-1"></i>
-                </a>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-6 col-md-3">
-                    <a href="shop?categoryId=1" class="text-decoration-none">
-                        <div class="card ff-product-card h-100 text-center p-4 shadow-sm">
-                            <div class="display-5 mb-2">🍎</div>
-                            <h6 class="fw-bold text-dark mb-1">Trái Cây Nhập Khẩu</h6>
-                            <span class="small text-muted">Táo Envy, Nho mẫu đơn, Kiwi...</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3">
-                    <a href="shop?categoryId=2" class="text-decoration-none">
-                        <div class="card ff-product-card h-100 text-center p-4 shadow-sm">
-                            <div class="display-5 mb-2">🥭</div>
-                            <h6 class="fw-bold text-dark mb-1">Đặc Sản Việt Nam</h6>
-                            <span class="small text-muted">Xoài cát Hòa Lộc, Bưởi da xanh...</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3">
-                    <a href="shop?categoryId=3" class="text-decoration-none">
-                        <div class="card ff-product-card h-100 text-center p-4 shadow-sm">
-                            <div class="display-5 mb-2">🍓</div>
-                            <h6 class="fw-bold text-dark mb-1">Trái Cây Đà Lạt</h6>
-                            <span class="small text-muted">Dâu tây, Bơ sáp 034, Hồng giòn...</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3">
-                    <a href="shop?categoryId=4" class="text-decoration-none">
-                        <div class="card ff-product-card h-100 text-center p-4 shadow-sm">
-                            <div class="display-5 mb-2">🎁</div>
-                            <h6 class="fw-bold text-dark mb-1">Giỏ Quà Trái Cây</h6>
-                            <span class="small text-muted">Thiết kế sang trọng biếu tặng</span>
-                        </div>
-                    </a>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="ff-footer mt-5">
+        <footer class="ff-footer mt-auto">
             <div class="container">
-                <div class="row g-4 pb-4 border-bottom border-secondary border-opacity-25">
-                    <div class="col-lg-4">
-                        <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="badge bg-success p-2 rounded-3"><i class="bi bi-basket2-fill fs-5"></i></span>
-                            <h5 class="text-white fw-bold mb-0">FreshFruit Store</h5>
-                        </div>
-                        <p class="small text-secondary mb-0">
-                            Hệ thống cung cấp trái cây tươi sạch trong ngày, nguồn gốc rõ ràng đạt chuẩn VietGAP & GlobalGAP, giao hàng siêu tốc trong 2 giờ.
-                        </p>
-                    </div>
-                    <div class="col-6 col-lg-3 offset-lg-1">
-                        <h6 class="text-white fw-bold mb-3">Dành cho Khách hàng</h6>
-                        <ul class="list-unstyled small d-flex flex-column gap-2">
-                            <li><a href="shop">Cửa hàng Trái cây (/shop)</a></li>
-                            <li><a href="cart.jsp">Giỏ hàng (cart.jsp)</a></li>
-                            <li><a href="checkout.jsp">Thanh toán (checkout.jsp)</a></li>
-                            <li><a href="my-orders.jsp">Lịch sử đơn hàng (my-orders.jsp)</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-lg-4">
-                        <h6 class="text-white fw-bold mb-3">Dành cho Quản trị viên</h6>
-                        <ul class="list-unstyled small d-flex flex-column gap-2">
-                            <li><a href="login.jsp">Đăng nhập hệ thống (login.jsp)</a></li>
-                            <li><a href="admin-product.jsp">Quản lý Danh mục, Sản phẩm & Kho (admin-product.jsp)</a></li>
-                            <li><a href="admin-order.jsp">Quản lý & Duyệt Đơn hàng (admin-order.jsp)</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 small text-secondary">
+                <div class="d-flex flex-wrap justify-content-between align-items-center pt-2 small text-secondary">
                     <span>&copy; 2026 FreshFruit Store - PRJ301 Project.</span>
-                    <span>Dev 1 &bull; Dev 2 &bull; Dev 3 &bull; Dev 4</span>
+                    <span>Hỗ trợ thanh toán: COD &bull; VietQR / VNPay</span>
                 </div>
             </div>
         </footer>

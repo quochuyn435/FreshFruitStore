@@ -65,7 +65,7 @@
         </div>
 
         <div class="text-center mt-3">
-            <a href="${pageContext.request.contextPath}/shop" class="small text-secondary text-decoration-none">
+            <a href="${pageContext.request.contextPath}/shop.jsp" class="small text-secondary text-decoration-none">
                 <i class="bi bi-arrow-left me-1"></i>Tiếp tục xem cửa hàng không cần đăng nhập
             </a>
         </div>

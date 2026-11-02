@@ -27,7 +27,7 @@
                 Tài khoản của bạn không có quyền quản trị viên (<strong>Admin</strong>) để truy cập vào khu vực này. Vui lòng đăng nhập bằng tài khoản có thẩm quyền.
             </p>
             <div class="d-flex justify-content-center gap-3">
-                <a href="${pageContext.request.contextPath}/shop" class="btn btn-outline-secondary px-4">
+                <a href="${pageContext.request.contextPath}/shop.jsp" class="btn btn-outline-secondary px-4">
                     <i class="bi bi-shop me-1"></i>Về Cửa hàng
                 </a>
                 <a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-success px-4">
