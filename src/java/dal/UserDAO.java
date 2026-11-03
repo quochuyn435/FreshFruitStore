@@ -247,4 +247,44 @@ public class UserDAO extends DBContext {
         }
         return true;
     }
+
+    // 7. Hàm cập nhật thông tin cá nhân của Khách hàng / User (Họ tên, SĐT, Địa chỉ, Mật khẩu)
+    public boolean updateUserProfile(int userId, String fullName, String phone, String address, String newPassword) {
+        boolean changePass = (newPassword != null && !newPassword.trim().isEmpty());
+
+        if (connection != null) {
+            String sql = changePass
+                    ? "UPDATE Users SET FullName = ?, Phone = ?, Address = ?, Password = ? WHERE UserID = ?"
+                    : "UPDATE Users SET FullName = ?, Phone = ?, Address = ? WHERE UserID = ?";
+            try (PreparedStatement st = connection.prepareStatement(sql)) {
+                st.setString(1, fullName);
+                st.setString(2, phone);
+                st.setString(3, address);
+                if (changePass) {
+                    st.setString(4, newPassword.trim());
+                    st.setInt(5, userId);
+                } else {
+                    st.setInt(4, userId);
+                }
+                st.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println("Lỗi updateUserProfile: " + e.getMessage());
+            }
+        }
+
+        synchronized (FALLBACK_USERS) {
+            for (User u : FALLBACK_USERS) {
+                if (u.getUserId() == userId) {
+                    u.setFullName(fullName);
+                    u.setPhone(phone);
+                    u.setAddress(address);
+                    if (changePass) {
+                        u.setPassword(newPassword.trim());
+                    }
+                    return true;
+                }
+            }
+        }
+        return true;
+    }
 }

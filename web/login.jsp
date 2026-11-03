@@ -20,7 +20,7 @@
     
     <!-- Nút điều hướng nhanh về Trang chủ / Cửa hàng -->
     <div class="mb-3 text-center">
-        <a href="${pageContext.request.contextPath}/index.html" class="ff-brand text-decoration-none">
+        <a href="${pageContext.request.contextPath}/index.jsp" class="ff-brand text-decoration-none">
             <span class="brand-badge"><i class="bi bi-basket2-fill"></i></span>
             <span>FreshFruit Store</span>
         </a>

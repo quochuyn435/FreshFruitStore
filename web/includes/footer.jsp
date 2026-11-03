@@ -17,7 +17,7 @@
             <div class="col-6 col-lg-3">
                 <h6 class="text-white fw-bold mb-3">Điều hướng</h6>
                 <ul class="list-unstyled small d-flex flex-column gap-2">
-                    <li><a href="${pageContext.request.contextPath}/index.html">Trang chủ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a></li>
                     <li><a href="${pageContext.request.contextPath}/shop.jsp">Cửa hàng trái cây</a></li>
                     <li><a href="${pageContext.request.contextPath}/checkout.jsp">Thanh toán</a></li>
                 </ul>
@@ -28,6 +28,7 @@
                 <ul class="list-unstyled small d-flex flex-column gap-2">
                     <c:choose>
                         <c:when test="${not empty sessionScope.account}">
+                            <li><a href="${pageContext.request.contextPath}/profile">Xem thông tin cá nhân</a></li>
                             <c:if test="${sessionScope.account.role == 'Admin' || sessionScope.account.role == 'admin'}">
                                 <li><a href="${pageContext.request.contextPath}/admin/users">Quản lý Tài khoản (Admin)</a></li>
                                 <li><a href="${pageContext.request.contextPath}/admin-order.jsp">Quản lý Đơn hàng (Admin)</a></li>
